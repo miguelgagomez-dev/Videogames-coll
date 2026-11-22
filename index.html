@@ -38,8 +38,8 @@ input,select,textarea,button{font:inherit;border-radius:10px;border:1px solid va
    <div class="field"><label for="year">AÑO</label><input id="year" type="number" min="1970" max="2100" placeholder="1998"></div>
    <div class="field"><label for="valueInput">VALOR ESTIMADO (€)</label><input id="valueInput" type="number" min="0" step="0.01" placeholder="0"></div>
    <div class="field"><label for="condition">ESTADO</label><select id="condition"><option value="">Sin especificar</option><option>Precintado</option><option>Como nuevo</option><option>Muy bueno</option><option>Bueno</option><option>Aceptable</option><option>Solo cartucho/disco</option></select></div>
-   <div class="field"><label for="coverFile">CARÁTULA PRINCIPAL</label><input id="coverFile" type="file" accept="image/*"></div>
-   <div class="field wide"><label for="scanPhotos">ESCÁNER GRATUITO · HASTA 4 FOTOS</label><input id="scanPhotos" type="file" accept="image/*" multiple><div class="actions"><button class="secondary" id="analyzePhotos" type="button">Leer texto de las fotos</button></div><div class="hint" id="scanStatus">El reconocimiento de texto se procesa en tu navegador. No identifica por sí solo el estado físico.</div></div>
+   <div class="field"><label for="coverFile">CARÁTULA PRINCIPAL</label><input id="coverFile" type="file" accept="image/*" capture="environment"></div>
+   <div class="field wide"><label for="scanPhotos">ESCÁNER GRATUITO · HASTA 4 FOTOS</label><input id="scanPhotos" type="file" accept="image/*" capture="environment" multiple><div class="actions"><button class="secondary" id="analyzePhotos" type="button">Leer texto de las fotos</button></div><div class="hint" id="scanStatus">El reconocimiento de texto se procesa en tu navegador. No identifica por sí solo el estado físico.</div></div>
    <div class="field wide"><label for="notes">NOTAS</label><textarea id="notes" maxlength="1000" placeholder="Edición, región, extras, recuerdos..."></textarea></div>
   </div>
   <div class="actions"><button id="saveButton" type="submit">Guardar videojuego</button><button class="secondary" id="cancelEdit" type="button" hidden>Cancelar edición</button></div>
