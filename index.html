@@ -98,7 +98,7 @@ function render(){
   const meta=document.createElement("div");meta.className="meta";meta.textContent=[g.platform,g.year,g.condition].filter(Boolean).join(" · ");
   const tag=document.createElement("span");tag.className="tag";tag.textContent=euro(g.value)+" estimados";
   info.append(title,meta,tag);
-  if(Number.isFinite(Number(g.valueMin))&&Number.isFinite(Number(g.valueMax))&&g.valueMin!==""&&g.valueMax!=="" ){const range=document.createElement("div");range.className="meta";range.textContent="Rango observado: "+euro(g.valueMin)+" – "+euro(g.valueMax);info.append(range)}
+  if(g.valueMin!==null&&g.valueMin!==undefined&&g.valueMax!==null&&g.valueMax!==undefined&&Number.isFinite(Number(g.valueMin))&&Number.isFinite(Number(g.valueMax))){const range=document.createElement("div");range.className="meta";range.textContent="Rango observado: "+euro(g.valueMin)+" – "+euro(g.valueMax);info.append(range)}
   const photos=[...(g.cover?[g.cover]:[]),...(g.photos||[])];
   if(photos.length){
    const gallery=document.createElement("div");gallery.className="photo-gallery";
