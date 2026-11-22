@@ -51,7 +51,13 @@ create policy "Owner can add own price observations" on public.price_observation
   auth.uid() = user_id and exists (select 1 from public.games g where g.id = game_id and g.user_id = auth.uid())
 );
 drop policy if exists "Owner can edit own price observations" on public.price_observations;
-create policy "Owner can edit own price observations" on public.price_observations for update to authenticated using (auth.uid() = user_id) with check (auth.uid() = user_id);
+create policy "Owner can edit own price observations" on public.price_observations for update to authenticated
+  using (auth.uid() = user_id)
+  with check (
+    auth.uid() = user_id and exists (
+      select 1 from public.games g where g.id = game_id and g.user_id = auth.uid()
+    )
+  );
 drop policy if exists "Owner can delete own price observations" on public.price_observations;
 create policy "Owner can delete own price observations" on public.price_observations for delete to authenticated using (auth.uid() = user_id);
 
