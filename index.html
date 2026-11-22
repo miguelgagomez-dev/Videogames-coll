@@ -107,7 +107,7 @@ function render(){
   if(g.region||g.completeness||g.edition){const extra=document.createElement("div");extra.className="meta";extra.textContent=[g.region,g.completeness,g.edition].filter(Boolean).join(" · ");info.append(extra)}
   if(g.photos&&g.photos.length){
    const gallery=document.createElement("div");gallery.className="photo-gallery";
-   g.photos.forEach((blob,index)=>{if(!blob)return;const thumb=document.createElement("img");const url=URL.createObjectURL(blob);thumb.src=url;thumb.alt="Foto adicional "+(index+1)+" de "+g.title;thumb.title="Abrir foto "+(index+1);thumb.onclick=()=>window.open(url,"_blank","noopener");gallery.append(thumb)});
+   g.photos.forEach((blob,index)=>{if(!blob)return;const thumb=document.createElement("img");const url=URL.createObjectURL(blob);thumb.src=url;thumb.alt="Foto adicional "+(index+1)+" de "+g.title;thumb.title="Abrir foto "+(index+1);thumb.style.cursor="zoom-in";thumb.onclick=()=>{const fullUrl=URL.createObjectURL(blob);const opened=window.open(fullUrl,"_blank");if(!opened){const link=document.createElement("a");link.href=fullUrl;link.target="_blank";link.rel="noopener";link.click()}setTimeout(()=>URL.revokeObjectURL(fullUrl),60000)};gallery.append(thumb)});
    info.append(gallery);
   }
   const priceLinks=document.createElement("div");priceLinks.className="price-links";
