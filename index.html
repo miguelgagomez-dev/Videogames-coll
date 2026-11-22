@@ -100,8 +100,8 @@ function render(){
  const root=$("games");root.replaceChildren();
  if(!list.length){const empty=document.createElement("div");empty.className="empty";const b=document.createElement("b");b.textContent=games.length?"No hay resultados":"Tu aventura empieza aquí";empty.append(b,document.createTextNode(games.length?"Prueba con otra búsqueda o plataforma.":"Añade tu primer videojuego con el formulario."));root.append(empty);return}
  list.forEach(g=>{
-  const card=document.createElement("details");card.className="game";
-  const summary=document.createElement("summary");summary.className="game-summary";
+  const card=document.createElement("div");card.className="game";
+  const summary=document.createElement("div");summary.className="game-summary";summary.setAttribute("role","button");summary.setAttribute("tabindex","0");summary.setAttribute("aria-expanded","false");
   const cover=document.createElement("div");cover.className="cover";
   if(g.cover){const img=document.createElement("img");const url=URL.createObjectURL(g.cover);img.src=url;img.alt="Carátula de "+g.title;img.onload=()=>URL.revokeObjectURL(url);cover.append(img)}else cover.textContent="▶";
   const summaryInfo=document.createElement("div");summaryInfo.className="summary-info";
@@ -109,7 +109,8 @@ function render(){
   const value=document.createElement("div");value.className="summary-value";value.textContent=euro(g.value);
   const hint=document.createElement("div");hint.className="open-hint";hint.textContent="Toca para ver más información";
   summaryInfo.append(title,value,hint);summary.append(cover,summaryInfo);
-  const info=document.createElement("div");info.className="game-info";
+  const info=document.createElement("div");info.className="game-info";info.hidden=true;
+  const toggleInfo=()=>{info.hidden=!info.hidden;summary.setAttribute("aria-expanded",String(!info.hidden));hint.textContent=info.hidden?"Toca para ver más información":"Toca para ocultar información"};summary.addEventListener("click",toggleInfo);summary.addEventListener("keydown",e=>{if(e.key==="Enter"||e.key===" "){e.preventDefault();toggleInfo()}});
   const meta=document.createElement("div");meta.className="meta";meta.textContent=[g.platform,g.year,g.condition].filter(Boolean).join(" · ");info.append(meta);
   if(g.valueMin!==null&&g.valueMin!==undefined&&g.valueMax!==null&&g.valueMax!==undefined&&Number.isFinite(Number(g.valueMin))&&Number.isFinite(Number(g.valueMax))){const range=document.createElement("div");range.className="meta";range.textContent="Rango observado: "+euro(g.valueMin)+" – "+euro(g.valueMax);info.append(range)}
   if(g.region||g.completeness||g.edition){const extra=document.createElement("div");extra.className="meta";extra.textContent=[g.region,g.completeness,g.edition].filter(Boolean).join(" · ");info.append(extra)}
